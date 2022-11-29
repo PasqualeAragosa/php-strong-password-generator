@@ -1,26 +1,8 @@
 <?php
 
+include __DIR__  . '/function.php';
 
-if (isset($_GET['size'])) {
-
-    $size = $_GET['size'];
-
-    function getRandomPassword($size)
-    {
-
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#!$%&?';
-        $randomCharacters = '';
-
-        for ($i = 0; $i < $size; $i++) {
-            $char = mt_rand(0, strlen($characters) - 1);
-            $randomCharacters .= $characters[$char];
-        }
-
-        return $randomCharacters;
-    }
-
-    $password = getRandomPassword($size);
-}
+$password = getRandomPassword($_GET['size']);
 
 ?>
 
@@ -57,15 +39,23 @@ if (isset($_GET['size'])) {
             <h2>Genera una password sicura</h2>
         </header>
         <main>
-            <div class="content mt-4">
+            <div class="content mt-4 text-start">
                 <form action="index.php" method="get">
-                    <label for="size">Lunghezza Password: </label>
+                    <label for="size"><strong>Lunghezza Password:</strong> </label>
                     <input name="size" id="size" type="number">
                     <button type="submit">Invia</button>
-                    <button type="reset">Resetta</button>
+                    <!-- <button type="reset">Resetta</button> -->
                 </form>
 
-                <p class="text-start">Password: <?php echo $password; ?> </p>
+                <?php if (isset($_GET['size'])) {
+                    if ($_GET['size'] > 7 && $_GET['size'] < 17) { ?>
+                        <p><strong>Password:</strong> <?= $password; ?></p>
+                    <?php } elseif ($_GET['size'] > 17) { ?>
+                        <p class="text-danger">Lunghezza massima 16 caratteri</p>
+                    <?php } else { ?>
+                        <p class="text-danger">Lunghezza minima 8 caratteri</p>
+                    <?php } ?>
+                <?php } ?>
             </div>
             <!-- /.content -->
         </main>

@@ -3,7 +3,7 @@
 include __DIR__  . '/function.php';
 
 if (isset($_GET['size'])) {
-    $password = getRandomPassword($_GET['size']);
+    $password = getRandomPassword($_GET['size'], $_GET['']);
 }
 ?>
 
@@ -45,11 +45,12 @@ if (isset($_GET['size'])) {
 
                 <form action="index.php" method="get">
                     <select class="form-select my-3">
-                        <option selected>Choose...</option>
-                        <option value="1">Lettere maiuscole</option>
-                        <option value="2">Lettere minuscole</option>
-                        <option value="3">Numeri</option>
+                        <option selected>Tutti i caratteri</option>
+                        <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">Lettere maiuscole</option>
+                        <option value="abcdefghijklmnopqrstuvwxyz">Lettere minuscole</option>
+                        <option value="0123456789">Numeri</option>
                     </select>
+
                     <!-- SCELTA -->
 
                     <label for="size"><strong>Lunghezza Password</strong> </label>
@@ -61,15 +62,15 @@ if (isset($_GET['size'])) {
 
                 </form>
 
-                <?php if (isset($_GET['size'])) {
-                    if ($_GET['size'] > 7 && $_GET['size'] < 17) { ?>
+                <?php if (isset($_GET['size'])) :
+                    if ($_GET['size'] > 7 && $_GET['size'] < 17) : ?>
                         <p><strong>Password:</strong> <?= $password; ?></p>
-                    <?php } elseif ($_GET['size'] > 17) { ?>
+                    <?php elseif ($_GET['size'] > 17) : ?>
                         <p class="text-danger">Lunghezza massima 16 caratteri</p>
-                    <?php } else { ?>
+                    <?php else : ?>
                         <p class="text-danger">Lunghezza minima 8 caratteri</p>
-                    <?php } ?>
-                <?php } ?>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!-- /.content -->
         </main>

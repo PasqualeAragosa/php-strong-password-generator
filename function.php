@@ -1,8 +1,10 @@
 <?php
 
 
-function getRandomPassword($size)
+function getRandomPassword($size, $choise)
 {
+    for ($i = 0; $i < $choise; $i++) {
+    }
 
     $numbers = '0123456789';
     $characters = 'abcdefghijklmnopqrstuvwxyz';

@@ -2,8 +2,9 @@
 
 include __DIR__  . '/function.php';
 
-$password = getRandomPassword($_GET['size']);
-
+if (isset($_GET['size'])) {
+    $password = getRandomPassword($_GET['size']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +41,24 @@ $password = getRandomPassword($_GET['size']);
         </header>
         <main>
             <div class="content mt-4 text-start">
+
+
                 <form action="index.php" method="get">
-                    <label for="size"><strong>Lunghezza Password:</strong> </label>
+                    <select class="form-select my-3">
+                        <option selected>Choose...</option>
+                        <option value="1">Lettere maiuscole</option>
+                        <option value="2">Lettere minuscole</option>
+                        <option value="3">Numeri</option>
+                    </select>
+                    <!-- SCELTA -->
+
+                    <label for="size"><strong>Lunghezza Password</strong> </label>
                     <input name="size" id="size" type="number">
+                    <!-- SIZE -->
+
                     <button type="submit">Invia</button>
-                    <!-- <button type="reset">Resetta</button> -->
+                    <!-- INVIA -->
+
                 </form>
 
                 <?php if (isset($_GET['size'])) {

@@ -4,18 +4,17 @@
 function getRandomPassword($size)
 {
 
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#!$%&?';
+    $numbers = '0123456789';
+    $characters = 'abcdefghijklmnopqrstuvwxyz';
+    $uppercaseCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $allCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#!$%&?';
     $randomCharacters = '';
 
+
     for ($i = 0; $i < $size; $i++) {
-        $char = mt_rand(0, strlen($characters) - 1);
-        $randomCharacters .= $characters[$char];
+        $char = mt_rand(0, strlen($allCharacters) - 1);
+        $randomCharacters .= $allCharacters[$char];
     }
 
     return $randomCharacters;
 }
-// if (isset($_GET['size'])) {
-
-//     $size = $_GET['size'];
-
-// }
